@@ -14,3 +14,4 @@ def test_say_hello(name):
     response = client.get(f"/hello/{name}")
     assert response.status_code == 200
     assert response.json() == {"message": f"Hello {name}"}
+    
