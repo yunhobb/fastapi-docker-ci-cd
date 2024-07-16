@@ -19,6 +19,11 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
 
+      - name: Add GitHub to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
       - name: Test SSH connection
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "echo SSH connection successful"
@@ -31,6 +36,6 @@ jobs:
             fi
             cd fastapi-docker-ci-cd
             git pull origin main
-            sudo /usr/local/bin/docker-compose down
-            sudo /usr/local/bin/docker-compose up --build -d
+            docker-compose down
+            docker-compose up --build -d
           EOF
