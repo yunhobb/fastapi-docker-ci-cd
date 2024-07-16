@@ -28,8 +28,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest
-
+          pytest ./tests/test.py || exit 1
       - name: Run Pylint
         run: |
-          pylint app tests --rcfile=.pylintrc
+          pylint app tests --rcfile=.pylintrc || exit 1
