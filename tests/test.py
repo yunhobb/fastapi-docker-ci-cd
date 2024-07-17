@@ -9,6 +9,10 @@ def test_root():
     assert response.status_code == 200
     assert response.json() == {"message": "Hello World"}
 
+def health_check():
+    response = client.get("/ping")
+    assert response.status_code == 200
+    assert response.json() == {"messa1ge": "pong"}
 
 @pytest.mark.parametrize("name", ["Alice", "Bob", "Charlie"])
 def test_say_hello(name):
