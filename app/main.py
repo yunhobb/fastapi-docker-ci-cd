@@ -8,7 +8,7 @@ async def root():
     return {"message": "Hello World"}
 
 @app.get("/ping")
-async def healthCheck():
+async def health_check():
     return {"message": "pong"}
 
 @app.get("/hello/{name}")
